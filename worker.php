@@ -2,7 +2,7 @@
 /**
  * 启动 php worker.php
  * 收集并且处理统计相关数据
- * @author xmc
+ *
  */
 date_default_timezone_set("asia/shanghai");
 include __DIR__.'/Bootstrap/Worker.php';

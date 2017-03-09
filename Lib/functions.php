@@ -1,9 +1,4 @@
 <?php
-/**
- * @author walkor
- * @author xmc
- */
-
 use Core\Session;
 
 //打包
@@ -25,14 +20,15 @@ function multiRequest($request_buffer_array)
 	foreach ($request_buffer_array as $address => $buffer) {
 		list ($ip, $port) = explode(':', $address);
 		$ip_list[$ip] = $ip;
-		$client = new swoole_client(SWOOLE_TCP | SWOOLE_KEEP, SWOOLE_SOCK_SYNC);
-		$client->connect($ip, $port);
+		$client = stream_socket_client("tcp://$address", $errno, $errmsg, 1);
 		if (! $client) {
 			continue;
 		}
 		$client_array[$address] = $client;
-		$client_array[$address]->send(encode($buffer));
-		$sock_to_address[(int) $client->sock] = $address;
+		stream_set_timeout($client_array[$address], 0, 100000);
+		fwrite($client_array[$address], encode($buffer));
+		stream_set_blocking($client_array[$address], 0);
+		$sock_to_address[(int) $client] = $address;
 	}
 	$read = $client_array;
 	$write = $except = $read_buffer = array();
@@ -40,21 +36,25 @@ function multiRequest($request_buffer_array)
 	$timeout = 0.99;
 	// 轮询处理数据
 	while (count($read) > 0) {
-		foreach ($read as $client) {
-			$address = $sock_to_address[(int) $client->sock];
-			$buf = $client->recv();
-			if (! $buf) {
-				unset($client_array[$address]);
-				continue;
-			}
-			if (! isset($read_buffer[$address])) {
-				$read_buffer[$address] = $buf;
-			} else {
-				$read_buffer[$address] .= $buf;
-			}
-			// 数据接收完毕
-			if (($len = strlen($read_buffer[$address])) && $read_buffer[$address][$len - 1] === "\n") {
-				unset($client_array[$address]);
+		if (@stream_select($read, $write, $except, 0, 200000)) {
+			foreach ($read as $socket) {
+				$address = $sock_to_address[(int) $socket];
+				$buf = fread($socket, 8192);
+				if (! $buf) {
+					if (feof($socket)) {
+						unset($client_array[$address]);
+					}
+					continue;
+				}
+				if (! isset($read_buffer[$address])) {
+					$read_buffer[$address] = $buf;
+				} else {
+					$read_buffer[$address] .= $buf;
+				}
+				// 数据接收完毕
+				if (($len = strlen($read_buffer[$address])) && $read_buffer[$address][$len - 1] === "\n") {
+					unset($client_array[$address]);
+				}
 			}
 		}
 		// 超时了
@@ -85,6 +85,7 @@ function check_auth()
 	if (Config\Config::$adminName == '' && Config\Config::$adminPassword == '') {
 		return true;
 	}
+
 	// 进入验证流程
 	$response = \Core\Response::getInstance()->response();
 	$session = \Core\Session::getInstance($response);

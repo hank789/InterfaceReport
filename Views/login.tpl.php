@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <title>统计与监控</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
 	<!--link rel="stylesheet/less" href="/less/bootstrap.less" type="text/css" /-->
 	<!--link rel="stylesheet/less" href="/less/responsive.less" type="text/css" /-->
@@ -13,7 +11,6 @@
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 	
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -26,12 +23,10 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="img/favicon.png">
-  
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/scripts.js"></script>
-	 <script type="text/javascript" src="/js/jquery.min.js"></script>
-	 <script type="text/javascript" src="/js/highcharts.js"></script>
+
+    <script class="common-asset" type="text/javascript" src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script class="common-asset" type="text/javascript" src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -47,7 +42,7 @@
 				</h4> 
 			</div>
 		<?php }?>
-			<h1>管理员登录</h1>
+			<h1>海豹精细化运营平台</h1>
 			<form role="form" method="POST" action="">
 				<div class="form-group">
 					 <label>用户名</label><input type="text" name="admin_name" class="form-control" />
@@ -62,6 +57,6 @@
 		</div>
 	</div>
 </div>
-<div class="footer">Powered by <a href="http://github.com/smalleyes" target="_blank"><strong>xmc!</strong></a></div>
+<div class="footer"></div>
 </body>
 </html>

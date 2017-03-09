@@ -3,7 +3,7 @@
 /*************************************
  * 自动加载类
  * @param unknown $class
- * @author xmc
+ *
  *************************************/
 function autoload($class)
 {

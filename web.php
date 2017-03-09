@@ -2,7 +2,7 @@
 /**
  * 启动 php web.php
  * 统计页面显示
- * @author xmc
+ *
  */
 date_default_timezone_set("asia/shanghai");
 include __DIR__.'/Bootstrap/WebServer.php';

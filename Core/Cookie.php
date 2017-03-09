@@ -1,7 +1,7 @@
 <?php
 /**
  * Cookie
- * @author xmc
+ *
  */
 
 namespace Core;

@@ -1,7 +1,7 @@
 <?php
 /**
  * Response 响应
- * @author xmc
+ *
  */
 
 namespace Core;

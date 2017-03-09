@@ -3,7 +3,7 @@
 /**
  * 统计客户端
  * @author workerman
- * @author xmc 2015.06.06
+ * 2015.06.06
  */
 class StatisticClient
 {
@@ -13,8 +13,6 @@ class StatisticClient
 	 * @var array
 	 */
 	protected static $timeMap = array();
-	
-	protected static $client;
 
 	/**
 	 * 模块接口上报消耗时间记时
@@ -40,7 +38,7 @@ class StatisticClient
 	 */
 	public static function report($module, $interface, $success, $code, $msg, $report_address = '')
 	{
-		$report_address = $report_address ? $report_address : '127.0.0.1:55656';
+		$report_address = $report_address ? $report_address : 'udp://127.0.0.1:55656';
 		if (isset(self::$timeMap[$module][$interface]) && self::$timeMap[$module][$interface] > 0) {
 			$time_start = self::$timeMap[$module][$interface];
 			self::$timeMap[$module][$interface] = 0;
@@ -54,9 +52,7 @@ class StatisticClient
 		
 		$cost_time = microtime(true) - $time_start;
 		$bin_data = Protocol::encode($module, $interface, $cost_time, $success, $code, $msg);
-
 		return self::sendData($report_address, $bin_data);
-
 	}
 
 	/**
@@ -65,20 +61,19 @@ class StatisticClient
 	 * @param string $buffer        	
 	 * @return boolean
 	 */
-	public static function sendData($address, $buffer, $timeout = 10)
+	public static function sendData($address, $buffer)
 	{
-		$socket = stream_socket_client('tcp://'.$address, $errno, $errmsg, $timeout);
+		$socket = stream_socket_client($address);
 		if (! $socket) {
 			return false;
 		}
-		stream_set_timeout($socket, $timeout);
 		return stream_socket_sendto($socket, $buffer) == strlen($buffer);
 	}
 }
 
 /**
  * 协议swoole
- * @author xmc
+ *
  */
 class Protocol
 {
@@ -105,7 +100,7 @@ class Protocol
 		);
 		$string = json_encode($data);
 		$packData = pack('N', strlen($string)).$string;
-// 		echo strlen($string).$string.PHP_EOL;//log
+		echo strlen($string).$string.PHP_EOL;//log
 		return $packData;
 	}
 	

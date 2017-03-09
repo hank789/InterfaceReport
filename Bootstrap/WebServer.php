@@ -3,7 +3,7 @@
 /*********************************
  * web server 不依赖php-fpm
  * 处理网页显示
- * @author xmc
+ *
  *********************************/
 
 namespace Bootstrap;
@@ -111,7 +111,7 @@ class WebServer
 			$result = empty($result) ? 'No message' : $result;
 			$response->end($result);
 			unset($result);
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			var_dump($e);
 		}
 	}

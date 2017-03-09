@@ -2,7 +2,7 @@
 
 /**********************************
  * 服务提供者
- * @author xmc
+ *
  *********************************/
 namespace Bootstrap;
 use \Config\Config;

@@ -2,14 +2,19 @@
 /*******************************************
  * web 请求入口文件
  * @author worker
- * @author xmc
+ *
  ******************************************/
-
 defined('ST_ROOT') OR define('ST_ROOT', realpath(__DIR__.'/../'));
 require_once ST_ROOT .'/Lib/functions.php';
 require_once ST_ROOT .'/Lib/Cache.php';
+
 require_once ST_ROOT .'/Config/Config.php';
+
+require_once ST_ROOT .'/Config/Common.php';
+require_once ST_ROOT . '/Core/Amqp.php';
+require_once ST_ROOT . '/Core/Log.php';
 // 覆盖配置文件
+
 foreach(glob(ST_ROOT . '/Config/Cache/*.php')  as $php_file) {
 	require_once $php_file;
 }
@@ -17,17 +22,22 @@ foreach(glob(ST_ROOT . '/Config/Cache/*.php')  as $php_file) {
 // 检查是否登录
 if (check_auth()) {
 	$func = isset($_GET['fn']) ? $_GET['fn'] : 'main';
-	$func = "\\Statistics\\Modules\\" . $func;
+    $md = isset($_GET['md']) ? $_GET['md'] : 'Performance';
+    $md = ucfirst($md);
+    $_SESSION['fn'] = $func;
+    $_SESSION['md'] = $md;
+
+	$func = "\\Statistics\\Modules\\" . $md. "\\" .$func;
 	if (! function_exists($func)) {
-		foreach (glob(ST_ROOT . "/Modules/*") as $php_file) {
+		foreach (glob(ST_ROOT . "/Modules/{$md}/*") as $php_file) {
 			require_once $php_file;
 		}
 	}
 	
 	if (! function_exists($func)) {
-		$func = "\\Statistics\\Modules\\main";
+		$func = "\\Statistics\\Modules\\Performance\\main";
 	}
-	
+
 	$module = isset($_GET['module']) ? $_GET['module'] : '';
 	$interface = isset($_GET['interface']) ? $_GET['interface'] : '';
 	$date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');

@@ -1,7 +1,7 @@
 <?php
 /**
  * 随机密钥
- * @author xmc
+ *
  */
 namespace Core;
 

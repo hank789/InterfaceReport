@@ -1,7 +1,4 @@
 <?php
-/**
- * @author walkor
- */
 namespace Statistics\Lib;
 class Cache
 {
