@@ -30,7 +30,7 @@ class Server
 			
 			'user' => 'xmc',
 			'group' => 'xmc',
-			'log_file' => 'data/server.log',
+			'log_file' => '/tmp/server.log',
 			'heartbeat_check_interval' => 60,
 			'heartbeat_idle_time' => 300,
 			'daemonize' => false // 守护进程改成true
