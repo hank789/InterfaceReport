@@ -45,7 +45,7 @@ class Server
 	public static function getWebServerConfig()
 	{
 		$config = array(
-			'worker_num' => 1, // worker进程数量
+			'worker_num' => 4, // worker进程数量
 			'max_request' => 1000, // 最大请求次数，当请求大于它时，将会自动重启该worker
 			'dispatch_mode' => 1,
 			'log_file' => 'data/web.log',
