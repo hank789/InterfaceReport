@@ -138,8 +138,8 @@ class Worker {
 			$this->handleWorkerPort = $port;
 		}
 		$serv = new \swoole_server($ip, $port, $mode, $type);	//处理客户端发送的数据
-        $serv->addlistener('0.0.0.0', $this->handleProviderPort, SWOOLE_SOCK_TCP|SWOOLE_SOCK_UDP); //处理统计页面请求的数据
-		$serv->addlistener('0.0.0.0', $this->udpFinderport, SWOOLE_SOCK_UDP); //recv udp broadcast
+        $serv->addListener('0.0.0.0', $this->handleProviderPort, SWOOLE_SOCK_TCP|SWOOLE_SOCK_UDP); //处理统计页面请求的数据
+		$serv->addListener('0.0.0.0', $this->udpFinderport, SWOOLE_SOCK_UDP); //recv udp broadcast
 		$serv->config = \Config\Server::getServerConfig();
 		$serv->set($serv->config);
 		$serv->on('Start', array($this, 'onStart'));
