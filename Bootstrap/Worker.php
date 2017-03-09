@@ -94,7 +94,7 @@ class Worker {
 	 */
 	protected $statisticDataKey = 'statisticData';
 	protected $handleWorkerPort = 55656;
-	protected $handleProviderPort = 55858;
+	protected $handleProviderPort = 55857;
 	protected $udpFinderport = 55859;
 	/**
 	 * MasterPid命令时格式化输出
@@ -236,7 +236,6 @@ class Worker {
 		if(!is_dir($log_dir)) {
 			mkdir($log_dir, 0777, true);
 		}
-
 		$this->process();	// 子进程
 	}
 
@@ -307,8 +306,10 @@ class Worker {
 	{
 		$this->childProcess->push($data);
 		$data = self::decode($data);
-        file_put_contents("/tmp/stats.txt", json_encode($data) . "\r\n", FILE_APPEND);
+        //file_put_contents("/tmp/stats.txt", json_encode($data) . "\r\n", FILE_APPEND);
 		$connInfo = $serv->connection_info($fd, $from_id);
+		file_put_contents("/tmp/stats.txt", json_encode($connInfo) . "\r\n", FILE_APPEND);
+
 		if ($connInfo['server_port'] == $this->handleWorkerPort) {
 			$module = $data['module'];
 			$interface = $data['interface'];

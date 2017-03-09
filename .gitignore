@@ -7,7 +7,4 @@
 /data/order/*
 /data/*.log
 
-/Config/Config.php
-/Config/Redis.php
-/Config/Server.php
-/Config/Worker.php
+/Config/*.php
