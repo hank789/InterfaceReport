@@ -107,14 +107,6 @@
                         <li <?php if($_SESSION['md'] == 'Performance' && $_SESSION['fn'] == 'order') { ?> class="active"<?php } ?>><a onclick="window.nav(this, event); return false;" href="/?md=performance&fn=order"><i class="fa fa-area-chart"></i> 访问排行</a></li>
                     </ul>
                 </li>
-                <li class="treeview active">
-                    <a href="javascript:;"> <i class="fa fa-binoculars"></i><span>业务监控</span> </a>
-                    <ul class="treeview-menu">
-                        <li <?php if($_SESSION['md'] == 'Business' && $_SESSION['fn'] == 'withdraw') { ?> class="active"<?php } ?>><a onclick="window.nav(this, event); return false;" href="/?md=business&fn=withdraw"><i class="fa fa-area-chart"></i> 提现统计</a></li>
-                        <li <?php if($_SESSION['md'] == 'Business' && $_SESSION['fn'] == 'register') { ?> class="active"<?php } ?>><a onclick="window.nav(this, event); return false;" href="/?md=business&fn=register"><i class="fa fa-area-chart"></i> 注册统计</a></li>
-                        <li <?php if($_SESSION['md'] == 'Business' && $_SESSION['fn'] == 'recharge') { ?> class="active"<?php } ?>><a onclick="window.nav(this, event); return false;" href="/?md=business&fn=recharge"><i class="fa fa-area-chart"></i> 充值统计</a></li>
-                    </ul>
-                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
