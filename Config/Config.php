@@ -9,7 +9,7 @@ namespace Config;
 class Config
 {
     // 数据源端口，会向这个端口发送udp广播获取ip，然后从这个端口以tcp协议获取统计信息
-    public static $ProviderPort = 55858;
+    public static $ProviderPort = 55857;
     public static $findProviderPort = 55859;
 
     public static $dataPath = '';
