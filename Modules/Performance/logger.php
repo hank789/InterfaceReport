@@ -55,7 +55,7 @@ function getStasticLog($module, $interface, $start_time, $offset = '', $count = 
 	}
 	
 	$read_buffer_array = multiRequest($request_buffer_array);
-	ksort($read_buffer_array);
+	krsort($read_buffer_array);
 	foreach ($read_buffer_array as $address => $buf) {
 		list ($ip, $port) = explode(':', $address);
 		$body_data = json_decode(trim($buf), true);
