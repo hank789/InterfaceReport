@@ -16,7 +16,7 @@ class Server
 	public static function getServerConfig()
 	{
 		$config = array(
-			'worker_num' => 12,
+			'worker_num' => 256,
 			// 协议
 			'open_length_check' => true,
 			'package_length_type' => 'N',
