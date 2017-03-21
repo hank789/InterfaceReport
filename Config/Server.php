@@ -30,7 +30,7 @@ class Server
 			'log_file' => Config::$dataPath.'server.log',
 			'heartbeat_check_interval' => 30,
 			'heartbeat_idle_time' => 30,
-			'daemonize' => false // 守护进程改成true
+			'daemonize' => true // 守护进程改成true
 		);
 		return $config;
 	}
@@ -46,7 +46,7 @@ class Server
 			'max_request' => 4000, // 最大请求次数，当请求大于它时，将会自动重启该worker
 			'dispatch_mode' => 1,
 			'log_file' => Config::$dataPath.'web.log',
-			'daemonize' => false, // 守护进程设置成true
+			'daemonize' => true, // 守护进程设置成true
 		);
 		return $config;
 	}
