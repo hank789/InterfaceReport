@@ -167,7 +167,7 @@ class WebServer
 			if (isset($_SERVER['REQUEST_URI'])) {
 				$log .= '[QUERY] ' . $_SERVER['REQUEST_URI'];
 			}
-			file_put_contents('data/web_error.log', $log);
+			file_put_contents(ST_ROOT.'/data/web_error.log', $log);
 		}
 	}
 	
