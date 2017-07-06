@@ -16,7 +16,7 @@ class Server
 	public static function getServerConfig()
 	{
 		$config = array(
-			'worker_num' => 32,
+			'worker_num' => 2,
 			// 协议
 			'open_length_check' => true,
 			'package_length_type' => 'N',
@@ -42,7 +42,7 @@ class Server
 	public static function getWebServerConfig()
 	{
 		$config = array(
-			'worker_num' => 4, // worker进程数量
+			'worker_num' => 2, // worker进程数量
 			'max_request' => 4000, // 最大请求次数，当请求大于它时，将会自动重启该worker
 			'dispatch_mode' => 1,
 			'log_file' => Config::$dataPath.'web.log',
