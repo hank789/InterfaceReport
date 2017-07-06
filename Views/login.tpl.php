@@ -42,7 +42,7 @@
 				</h4> 
 			</div>
 		<?php }?>
-			<h1>海豹精细化运营平台</h1>
+			<h1>接口性能统计平台</h1>
 			<form role="form" method="POST" action="">
 				<div class="form-group">
 					 <label>用户名</label><input type="text" name="admin_name" class="form-control" />
