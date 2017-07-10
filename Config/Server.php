@@ -43,7 +43,7 @@ class Server
 	{
 		$config = array(
 			'worker_num' => 2, // worker进程数量
-			'max_request' => 4000, // 最大请求次数，当请求大于它时，将会自动重启该worker
+			'max_request' => 40000, // 最大请求次数，当请求大于它时，将会自动重启该worker
 			'dispatch_mode' => 1,
 			'log_file' => Config::$dataPath.'web.log',
 			'daemonize' => false, // 守护进程设置成true
