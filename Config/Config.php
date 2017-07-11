@@ -35,6 +35,8 @@ class Config
      */
     public static $logBufferKey = 'logBuffer';
 
+    public static $orderDir = 'statistic/order/';
+
     /**
      *  最大日志buffer，大于这个值就写磁盘
      * @var integer
